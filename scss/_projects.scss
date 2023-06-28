@@ -1,0 +1,105 @@
+@use 'config' as c;
+
+.projects {
+    padding-bottom: 2rem;
+
+    &__bio-image {
+        height: 30vh;
+        width: 100%;
+        background-image: 
+        linear-gradient(to right bottom, rgba(c.$primary-color, 0.4), rgba(c.$primary-color, 0.2)),
+        url(../dist/img/model-1.jpg);
+    background-position: center top;
+    background-size: cover;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+
+    .text-secondary {
+        font-size: 2rem;
+        margin-bottom: 2rem;
+    }
+
+    }
+
+    &__items {
+        width: 60vw;
+        margin: 2rem auto 0 auto;
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+
+    &__item {
+        position: relative;
+        border-bottom: 5px solid c.$secondary-color;
+        overflow: hidden;
+        cursor: pointer;
+
+        img {
+            width: 100%;
+        }
+
+        &::after {
+            content: '';
+            position: absolute;
+            top: 100%;
+            left: 0;
+            height: 100%;
+            width: 100%;
+            background-color: c.$secondary-color;
+            opacity: 0;
+            @include c.transition-ease;
+        }
+
+        &:hover {
+            &::after {
+                top: 0;
+                opacity: 0.9;
+            }
+
+            .projects__btn {
+                opacity: 1;
+            }
+        }
+    }
+
+
+    &__btns {
+        position: absolute;
+        top: 0;
+        height: 100%;
+        width: 100%;
+        z-index: 1;
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        align-items: center;
+        justify-items: center;
+        /* text-align: center; */
+    }
+
+
+    &__btn {
+        opacity: 0;
+        color: c.text-color(c.$secondary-color);
+        @include c.transition-ease;
+
+        &:hover {
+            color: c.text-color(c.text-color(c.$secondary-color));
+        }
+    }
+
+
+    .social-icons {
+        display: flex;
+        flex-direction: column;
+    }
+
+    footer {
+        transform: 
+        rotate(90deg)
+        translate(-3rem, -5rem)
+    }
+
+}

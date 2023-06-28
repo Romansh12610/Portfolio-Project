@@ -1,0 +1,46 @@
+@use 'sass:math';
+
+$primary-color: rgb(39, 39, 39);
+$secondary-color: hsl(16, 100%, 59%);
+
+*, *:before, *:after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+@mixin transition-ease {
+    transition: all 0.5s ease-in-out;
+}
+
+@function text-color($color) {
+    @if (lightness($color) > 40%) {
+        @return #000;
+    }
+
+    @else {
+        @return #fff;
+    }
+}
+
+@function pxIntoRem($pixel) {
+    @if math.is-unitless($pixel) {
+        @return math.div($pixel, 16) + rem;
+    } @else {
+        @error 'Hello, bro, use only number pls, withouts units!';
+    }
+}
+
+
+$screen-widths: (
+    'medium': 768px,
+    'large': pxIntoRem(1024),
+    'x-large': pxIntoRem(1600)
+);
+
+
+@mixin media($width) {
+    @media screen and (min-width: map-get($screen-widths, $width)) {
+        @content;
+    }
+}
